@@ -1,7 +1,6 @@
 require 'matrix'
 
-@Vigenere = [
-    ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"],
+@vigenere = [
     ["A", "B", "C", "D", "E", "F", "G", "H", "I",  "J",  "K",  "L", "M",  "N",  "Ñ",  "O",  "P",  "Q",  "R",  "S",  "T",  "U",  "V",  "W",  "X",  "Y",  "Z"],
     ["B", "C", "D", "E", "F", "G", "H", "I",  "J",  "K",  "L", "M",  "N",  "Ñ",  "O",  "P",  "Q",  "R",  "S",  "T",  "U",  "V",  "W",  "X",  "Y",  "Z", "A"],
     ["C", "D", "E", "F", "G", "H", "I",  "J",  "K",  "L", "M",  "N",  "Ñ",  "O",  "P",  "Q",  "R",  "S",  "T",  "U",  "V",  "W",  "X",  "Y",  "Z", "A", "B"],
@@ -31,13 +30,41 @@ require 'matrix'
     ["Z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "Ñ", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"],
     ]
 
-def imprimir 
-    @Vigenere.each do |fila|
-        fila.each do |elemento|
-        print "#{elemento}\t" # \t para separar los elementos por una tabulación
+def searchmessage(message)
+    message = message.upcase  # Convertir la letra a mayúsculas
+    @vigenere.each_with_index do |row, index|
+        if row[0] == message
+            return index  # Devolver la posición encontrada
         end
-        puts "\n" # Salto de línea después de cada fila
-    end  
+    end
+        return nil  # Si no se encuentra la letra, devolver nil
 end
 
-imprimir()
+def searchkey(key)
+    key = key.upcase  # Convertir la letra a mayúsculas
+    @vigenere[0].each_with_index do |column, index|
+        if column == key
+          return index  # Devolver la posición encontrada
+        end
+      end
+      
+      return nil  # Si no se encuentra la letra, devolver nil
+    end
+
+
+def usermessage
+    p "Bienvenid@, ingresa tu mensaje"
+    word = gets.chomp
+    position = searchmessage(word)
+    puts "La letra '#{word}' se encuentra en la posición #{position}" unless position.nil?
+    userkey
+end
+
+def userkey
+    p "Ahora la palabra que sera tu clave"
+    key = gets.chomp
+    position = searchkey(key)
+    puts "La letra '#{key}' se encuentra en la posición #{position}" unless position.nil?
+end
+
+usermessage
