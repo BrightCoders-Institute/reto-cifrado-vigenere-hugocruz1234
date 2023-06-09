@@ -48,26 +48,21 @@ def compararcolumna(indexm,clave)
     p "Valor de coincidencia: #{@solution}" 
 end
 
-def ingresardatos 
-    p "Ingresa tu mensaje: " 
-    mensaje = gets.chomp 
-    p "Ingresa tu clave: " 
-    clave = gets.chomp
-    compararfila(mensaje,clave)
-end
-
-def request
+def ingresardatos
     p "Introduce tu mensaje: "
     message = gets.chomp
     p "Introduce tu palabra clave: "
     key = gets.chomp
-    adapt_size(message,key)
+    igualar(message,key)
 end
 
-def adapt_size(message, key)
+def igualar(message, key)
     size = [message.length, key.length].max
     key = key.ljust(size, key)
-    p key
+    mensaje = message.split("")
+    llave = key.split("")
+    p mensaje
+    p llave
 end
   
 ingresardatos
