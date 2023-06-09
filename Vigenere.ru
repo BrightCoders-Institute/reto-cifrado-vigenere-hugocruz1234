@@ -29,11 +29,45 @@ require 'matrix'
     ["Y",  "Z", "A", "B", "C", "D", "E", "F", "G", "H",  "I",  "J",  "K",  "L", "M",  "N",    "O",  "P",  "Q",  "R",  "S",  "T",  "U",  "V",  "W",  "X"],
     ["Z", "A", "B", "C", "D", "E", "F", "G", "H",  "I",  "J",  "K",  "L", "M",  "N",    "O",  "P",  "Q",  "R",  "S",  "T",  "U",  "V",  "W",  "X",  "Y"]
   ]
+  @solution=""
 
-def letra_a_numero(letra)
-    letra.downcase!  # Convertir la letra a minúscula  
-    n = letra.ord - 'a'.ord
-    p n
+def compararfila(mensaje,clave)
+    mensaje.downcase!  # Convertir la letra a minúscula  
+    n = mensaje.ord - 'a'.ord
+    index = @vigenere[0].index(n.to_s)
+    p "La posición de la coincidencia es: #{index}"
+    compararcolumna(index,clave)
 end
 
-letra_a_numero "z"
+def compararcolumna(indexm,clave)
+    clave = clave.upcase
+    index = @vigenere[1].index(clave)
+    letracoincidencia = @vigenere[indexm+1][index]
+    @solution += letracoincidencia
+    p "La posición de la coincidencia es: #{index}"
+    p "Valor de coincidencia: #{@solution}" 
+end
+
+def ingresardatos 
+    p "Ingresa tu mensaje: " 
+    mensaje = gets.chomp 
+    p "Ingresa tu clave: " 
+    clave = gets.chomp
+    compararfila(mensaje,clave)
+end
+
+def request
+    p "Introduce tu mensaje: "
+    message = gets.chomp
+    p "Introduce tu palabra clave: "
+    key = gets.chomp
+    adapt_size(message,key)
+end
+
+def adapt_size(message, key)
+    size = [message.length, key.length].max
+    key = key.ljust(size, key)
+    p key
+end
+  
+ingresardatos
