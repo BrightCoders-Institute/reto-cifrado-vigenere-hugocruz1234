@@ -41,21 +41,16 @@ end
 def compararcolumna(indexm,clave)
     clave = clave.upcase
     index = @vigenere[1].index(clave)
-    letracoincidencia = @vigenere[indexm+1][index]
+    rindex = indexm + 1
+    letracoincidencia = @vigenere[rindex][index]
     @solution += letracoincidencia
 end
 
-def ingresardatos
-    p "Introduce tu mensaje: "
-    message = gets.chomp
-    p "Introduce tu palabra clave: "
-    key = gets.chomp
-    igualar(message,key)
-end
 
 def igualar(message, key)
     size = [message.length, key.length].max
     key = key.ljust(size, key)
+    return key
     separardatos(message, key)
 end
 
@@ -75,4 +70,15 @@ def result
     p @solution
 end
 
-ingresardatos
+def main
+    #puts "Ingrese el mensaje:"
+    message = gets.chomp
+    
+    #puts "Ingrese la clave:"
+    key = gets.chomp
+  
+    igualar(message, key)
+  end
+  
+  main
+  
