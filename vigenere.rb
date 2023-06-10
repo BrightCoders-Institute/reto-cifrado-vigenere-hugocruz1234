@@ -71,10 +71,10 @@ def result
 end
 
 def main
-    #puts "Ingrese el mensaje:"
+    puts "Ingrese el mensaje:"
     message = gets.chomp
     
-    #puts "Ingrese la clave:"
+    puts "Ingrese la clave:"
     key = gets.chomp
   
     igualar(message, key)
