@@ -35,7 +35,6 @@ def compararfila(mensaje,clave)
     mensaje.downcase!  # Convertir la letra a minúscula  
     n = mensaje.ord - 'a'.ord
     index = @vigenere[0].index(n.to_s)
-    p "La posición de la coincidencia es: #{index}"
     compararcolumna(index,clave)
 end
 
@@ -44,8 +43,6 @@ def compararcolumna(indexm,clave)
     index = @vigenere[1].index(clave)
     letracoincidencia = @vigenere[indexm+1][index]
     @solution += letracoincidencia
-    p "La posición de la coincidencia es: #{index}"
-    p "Valor de coincidencia: #{@solution}" 
 end
 
 def ingresardatos
@@ -59,10 +56,23 @@ end
 def igualar(message, key)
     size = [message.length, key.length].max
     key = key.ljust(size, key)
+    separardatos(message, key)
+end
+
+def separardatos(message, key)
     mensaje = message.split("")
     llave = key.split("")
-    p mensaje
-    p llave
+    size = message.size
+    for x in 0..(size-1)
+        valormensaje = mensaje[x]
+        valorllave = llave[x]
+        compararfila(valormensaje,valorllave)
+    end
+    result
 end
-  
+
+def result
+    p @solution
+end
+
 ingresardatos
